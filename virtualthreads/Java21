@@ -1,0 +1,28 @@
+// Java 21 Code using Virtual Threads
+public class VirtualThreadExample {
+    public static void main(String[] args) throws InterruptedException {
+        int numberOfTasks = 1000;
+
+        long start = System.currentTimeMillis();
+
+        Thread[] threads = new Thread[numberOfTasks];
+
+        for (int i = 0; i < numberOfTasks; i++) {
+            threads[i] = Thread.ofVirtual().unstarted(() -> {
+                try {
+                    Thread.sleep(100);  // Simulate IO-bound task
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+            threads[i].start();
+        }
+
+        for (int i = 0; i < numberOfTasks; i++) {
+            threads[i].join();
+        }
+
+        long end = System.currentTimeMillis();
+        System.out.println("Java 21 Virtual Threads Duration: " + (end - start) + " ms");
+    }
+}
