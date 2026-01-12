@@ -1,3 +1,6 @@
+package virtualthreads;
+
+import virtualthreads.VirtualThreadExample;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -5,7 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.*;
 
-class TestTraditionalThreadExampleTest {
+class TestVirtualThreadExampleTest {
 
     private final PrintStream originalOut = System.out;
     private ByteArrayOutputStream outContent;
@@ -23,10 +26,9 @@ class TestTraditionalThreadExampleTest {
 
     @Test
     void testMainRunsAndPrintsDuration() {
-        assertDoesNotThrow(() -> TraditionalThreadExample.main(new String[]{}));
+        assertDoesNotThrow(() -> VirtualThreadExample.main(new String[]{}));
         String output = outContent.toString();
-        assertTrue(output.contains("Java 17 Traditional Threads Duration"), "Output should contain duration message");
-        // Optionally, check that the duration is a positive number
+        assertTrue(output.contains("Virtual Threads Duration"), "Output should contain duration message");
         String[] parts = output.split(":");
         assertTrue(parts.length > 1, "Output should contain ':' separator");
         String msPart = parts[1].replaceAll("[^0-9]", "");
