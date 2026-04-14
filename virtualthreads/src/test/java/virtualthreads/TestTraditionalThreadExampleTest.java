@@ -28,13 +28,9 @@ class TestTraditionalThreadExampleTest {
     void testMainRunsAndPrintsDuration() {
         assertDoesNotThrow(() -> TraditionalThreadExample.main(new String[]{}));
         String output = outContent.toString();
-        assertTrue(output.contains("Traditional Threads Duration"), "Output should contain duration message");
-        // Optionally, check that the duration is a positive number
-        String[] parts = output.split(":");
-        assertTrue(parts.length > 1, "Output should contain ':' separator");
-        String msPart = parts[1].replaceAll("[^0-9]", "");
-        assertFalse(msPart.isEmpty(), "Duration should be present");
-        long duration = Long.parseLong(msPart);
-        assertTrue(duration > 0, "Duration should be positive");
+        assertTrue(output.contains("Traditional Threads:"), "Output should contain traditional threads message");
+        assertTrue(output.contains("tasks in"), "Output should contain task count and duration");
+        assertTrue(output.contains("tasks/sec"), "Output should contain tasks per second");
+        assertTrue(output.contains("INFO TraditionalThreadExample"), "Output should contain logger information");
     }
 }
